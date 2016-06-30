@@ -126,9 +126,11 @@ public:
 				int y = lp / dst_stride[i];
 				int LUX = x - radius;
 				int LUY = y - radius;
-				const static int r = radius * 2 + 1;
-				const static int widthm = width - 1;
-				const static int heightm = height - 1;
+				const int r = radius * 2 + 1;
+				const int width = dst_width[i];
+				const int height = dst_height[i];
+				const int widthm = width - 1;
+				const int heightm = height - 1;
 				const auto getSubPixel0 = [&](int ord)-> pointType
 				{
 					int ordx = LUX + ord % r;
@@ -145,7 +147,7 @@ public:
 				};
 				
 				bool testFlag = 1;
-				if (LUX >= 0 && x + radius <= width&&LUY >= 0 && y + radius <= height)
+				if (LUX >= 0 && x + radius < width&&LUY >= 0 && y + radius < height)
 				{
 					testFlag = 0;
 				}
